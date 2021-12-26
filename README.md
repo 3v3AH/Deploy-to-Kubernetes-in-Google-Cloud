@@ -3,7 +3,8 @@
 Deploy to Kubernetes in Google Cloud: Challenge Lab
 
 
-step 1:----------- Create a Docker image and store the Dockerfile -----------------
+Task 1: Create a Docker image and store the Dockerfile 
+-----------------
 
 gsutil cat gs://cloud-training/gsp318/marking/setup_marking_v2.sh | bash
 
@@ -36,8 +37,9 @@ cd marking
 
 
 
-******************************************************************************************************************************
-step 2:----------- Test the created Docker image -----------------
+
+Task 2:Test the created Docker image 
+----------------------------------------
                        
 cd ..
                        
@@ -51,12 +53,8 @@ cd marking
                        
 ./step2_v2.sh  
 
-
-
-
-
-******************************************************************************************************************************
-step 3:----------- Push the Docker image in the Container Repository -----------------
+Task 3:Push the Docker image in the Container Repository
+-----------------------------------------------------------
                        
 cd ..
                        
@@ -67,13 +65,10 @@ docker tag valkyrie-app:v0.0.1 gcr.io/$GOOGLE_CLOUD_PROJECT/valkyrie-app:v0.0.1
 docker push gcr.io/$GOOGLE_CLOUD_PROJECT/valkyrie-app:v0.0.1
                        
 sed -i s#IMAGE_HERE#gcr.io/$GOOGLE_CLOUD_PROJECT/valkyrie-app:v0.0.1#g k8s/deployment.yaml
+                       
 
-
-
-
-
-******************************************************************************************************************************
-step 4:------------ Create and expose a deployment in Kubernetes -----------------
+Task 4:Create and expose a deployment in Kubernetes 
+----------------------------------------------------
                        
 
 sed -i s#IMAGE_HERE#gcr.io/$GOOGLE_CLOUD_PROJECT/valkyrie-app:v0.0.1#g k8s/deployment.yaml
@@ -89,10 +84,8 @@ git merge origin/kurt-dev
 kubectl edit deployment valkyrie-dev
 
 
-
-
-******************************************************************************************************************************
-step 5:------------ Update the deployment with a new version of valkyrie-app -----------------
+Task 5:Update the deployment with a new version of valkyrie-app
+-----------------------------------------------------------------
                        
 
 docker build -t gcr.io/$GOOGLE_CLOUD_PROJECT/valkyrie-app:v0.0.2 . 
@@ -103,11 +96,8 @@ kubectl edit deployment valkyrie-dev
 
 docker ps
 
-
-
-
-
-step 6:-------------------- Create a pipeline in Jenkins to deploy your app -----------------
+Task 6:Create a pipeline in Jenkins to deploy your app
+-----------------------------------------------------
 
 docker kill container_id
 
